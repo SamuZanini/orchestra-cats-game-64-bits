@@ -6,8 +6,8 @@ Este projeto é uma implementação do clássico jogo da cobrinha, desenvolvido 
 
 - Samuel Zanini Campos Vanoni (https://github.com/SamuZanini)
 - Hugo Otávio dos Santos de Paula (https://github.com/HugOtavioS)
-- Murilo Marques Dantas Vieira (https://github.com/Nogueirajv0078)
-- João Vitor Nogueira Alves ()
+- Murilo Marques Dantas Vieira ()
+- João Vitor Nogueira Alves (https://github.com/Nogueirajv0078)
 
 ## Descrição 📝
 

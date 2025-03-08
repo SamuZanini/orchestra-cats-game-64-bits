@@ -1,14 +1,29 @@
+# Definimos Imports como uma classe para encapsular de forma organizada e centralizada a inicialização e configuração do jogo. Ao usar uma classe, especialmente com o padrão Singleton, podemos:
+# Manter estado: A classe armazena atributos (como cores, telas, assets, etc.) que persistem enquanto o jogo roda.
+# Evitar inicializações repetidas: O Singleton garante que apenas uma instância seja criada e reutilizada, evitando cargas desnecessárias de recursos.
+# Organizar funcionalidades: Uma classe permite agrupar métodos e atributos relacionados à configuração, facilitando o acesso e a manutenção do código, algo que uma função isolada não conseguiria fazer de forma tão estruturada.
 class Imports:
+
+    # Os duplos underlines antes e depois do nome (por exemplo, __new__ e __init__) indicam que se tratam de métodos especiais da linguagem e não são chamados diretamente pelo programador, mas automaticamente pelo Python conforme o seu funcionamento interno.
+
+    # _instance armazena a única instância que será criada.
     _instance = None
+    # _initialized garante que a inicialização (dentro de __init__) seja executada apenas uma vez.
     _initialized = False
 
+    # O método __new__ é responsável por criar uma nova instância da classe Imports.
+    # Esse método é chamado antes de __init__ para criar uma nova instância.
     def __new__(cls):
         if cls._instance is None:
+            # Ele verifica se _instance é None. Se for, chama super().__new__(cls) para criar a instância e armazena em _instance.
             cls._instance = super(Imports, cls).__new__(cls)
+        # Se já existir uma instância, retorna-a imediatamente, garantindo que não sejam criadas múltiplas instâncias.
         return cls._instance
 
     def __init__(self):
         if not self._initialized:
+            # Mesmo que o construtor seja chamado várias vezes, a verificação if not self._initialized: impede que a inicialização (como carregar assets e configurações) seja repetida.
+            # Após a primeira execução, _initialized é definido como True, evitando reinicializações desnecessárias.
             self._initialized = True
             
             import pygame
@@ -32,7 +47,7 @@ class Imports:
             self.dis_height = 896
             self.dis = pygame.display.set_mode((self.dis_width, self.dis_height))
             pygame.display.set_caption('Orchestra Cats')
-            
+
             # Corrigido assets path para src/assets invés de settings/assets
             self.assets_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets')
             pygame.display.set_icon(pygame.image.load(os.path.join(self.assets_path, 'images', 'game_icon.png')))
@@ -52,14 +67,13 @@ class Imports:
             self.yarn_gray_counter = pygame.image.load(os.path.join(self.assets_path, 'images', 'yarn_gray_counter.png'))
             self.yarn_red = pygame.image.load(os.path.join(self.assets_path, 'images', 'yarn_red.png'))
 
-            # Backgrounds para diferentes gêneros
-            # Carrega imagens de telas de término do jogo (game over e vitória)
+            # Carrega os backgrounds para diferentes gêneros
             self.menu_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'bg_menu.png'))
             self.classical_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'stage_background.png'))
             self.citypop_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'bg_citypop.png'))
             self.rock_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'bg_rock.png'))
 
-            # Carrega imagens de telas de término
+            # Carrega as imagens de telas de término do jogo (game over e vitória)
             self.game_over_img = pygame.image.load(os.path.join(self.assets_path, 'images', 'game_over.png'))
             self.you_win_img = pygame.image.load(os.path.join(self.assets_path, 'images', 'you_win.png'))
 
@@ -75,13 +89,14 @@ class Imports:
                 pygame.image.load(os.path.join(self.assets_path, 'images', 'cat_saxofone.png'))
             ]
 
-            # Lista de imagens para os gatos pop
+            # Lista de imagens para os gatos citypop
             self.catpop_musicians = [
                 pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_guitar.png')),
                 pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_bass.png')),
                 pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_drums.png')),
                 pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_piano.png')),
-                pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_dj.png'))
+                pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_dj.png')),
+                pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_teclado.png'))
             ]
             self.catpop_conductor = pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_vocal.png'))
 
@@ -94,7 +109,8 @@ class Imports:
             ]
             self.catrock_conductor = pygame.image.load(os.path.join(self.assets_path, 'images', 'catrock_vocal.png'))
 
-            # Dicionário com a lista de músicas disponíveis e seus nomes de arquivo
+            # Dicionário com a lista de músicas disponíveis e seus nomes de arquivo, passando o gênero de cada música
+            # O dicionário music_list contém os nomes das músicas como chaves e um dicionário com o nome do arquivo e o gênero da música como valores. Isso permite que o jogo saiba qual arquivo de música carregar e qual imagem de fundo exibir para cada gênero de música.
             self.music_list = {
                 "Paganini - Caprice 24": {"file": "caprice24.MP3", "genre": "classical"},
                 "Paganini - La Capanella": {"file": "laCampanella.MP3", "genre": "classical"},
@@ -120,4 +136,10 @@ class Imports:
             self.os = os
 
 # Cria uma single instance que vai ser usada durante o game
+# O Imports é um singleton que encapsula a inicialização dos módulos do Pygame e outras configurações do jogo. Ele é responsável por carregar as imagens, definir as cores, configurar a janela do jogo e carregar as músicas disponíveis. Além disso, ele define as fontes usadas para renderizar o texto na tela. O Imports é um exemplo de encapsulamento de funcionalidades relacionadas à inicialização do jogo, tornando mais fácil acessar essas configurações em outros módulos.
+# Ela garante que apenas um objeto da classe Imports seja criado e utilizado por todo o jogo.
+# Com isso, ao usar a variável global "imports", o jogo sempre acessa o mesmo objeto, evitando reinicializações ou múltiplos carregamentos de módulos e assets.
+# Veja como funciona: 
+# new: Este método verifica se uma instância da classe já existe (usando a variável de classe _instance). Se não existir, ele cria uma nova instância e a armazena.
+# init: Mesmo que o construtor seja chamado mais de uma vez, a inicialização real acontece somente na primeira vez, controlada pela flag _initialized.
 imports = Imports()
