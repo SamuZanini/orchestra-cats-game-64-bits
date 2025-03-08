@@ -49,13 +49,18 @@ class Imports:
             self.yarn_gray = pygame.image.load(os.path.join(self.assets_path, 'images', 'yarn_gray.png'))
             self.yarn_gray_counter = pygame.image.load(os.path.join(self.assets_path, 'images', 'yarn_gray_counter.png'))
             self.yarn_red = pygame.image.load(os.path.join(self.assets_path, 'images', 'yarn_red.png'))
-            self.stage_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'stage_background.png'))
+
+            # Backgrounds para diferentes gêneros
+            self.menu_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'bg_menu.png'))
+            self.classical_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'stage_background.png'))
+            self.citypop_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'bg_citypop.png'))
+            self.rock_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'bg_rock.png'))
 
             # Carrega imagens de telas de término
             self.game_over_img = pygame.image.load(os.path.join(self.assets_path, 'images', 'game_over.png'))
             self.you_win_img = pygame.image.load(os.path.join(self.assets_path, 'images', 'you_win.png'))
 
-            # Lista de imagens para os gatos músicos
+            # Lista de imagens para os gatos músicos clássicos
             self.cat_musicians = [
                 pygame.image.load(os.path.join(self.assets_path, 'images', 'cat_violin.png')),
                 pygame.image.load(os.path.join(self.assets_path, 'images', 'cat_trompete.png')),
@@ -67,19 +72,38 @@ class Imports:
                 pygame.image.load(os.path.join(self.assets_path, 'images', 'cat_saxofone.png'))
             ]
 
-            # Lista de músicas disponíveis
+            # Lista de imagens para os gatos pop
+            self.catpop_musicians = [
+                pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_guitar.png')),
+                pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_bass.png')),
+                pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_drums.png')),
+                pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_piano.png')),
+                pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_dj.png'))
+            ]
+            self.catpop_conductor = pygame.image.load(os.path.join(self.assets_path, 'images', 'catpop_vocal.png'))
+
+            # Lista de imagens para os gatos rock
+            self.catrock_musicians = [
+                pygame.image.load(os.path.join(self.assets_path, 'images', 'catrock_guitar.png')),
+                pygame.image.load(os.path.join(self.assets_path, 'images', 'catrock_piano.png')),
+                pygame.image.load(os.path.join(self.assets_path, 'images', 'catrock_drums.png')),
+                pygame.image.load(os.path.join(self.assets_path, 'images', 'catrock_dj.png'))
+            ]
+            self.catrock_conductor = pygame.image.load(os.path.join(self.assets_path, 'images', 'catrock_vocal.png'))
+
+            # Lista de músicas disponíveis com seus gêneros
             self.music_list = {
-                "Paganini - Caprice 24": "caprice24.MP3",
-                "Paganini - La Capanella": "laCampanella.MP3",
-                "Chopin - Nocturne op.9 No.2": "nocturne.mp3",
-                "Chopin - Nocturne in C Sharp Minor for Violin and Piano": "nocturneViolin.MP3",
-                "Oskar Rieding - Violin Concerto in B Minor, Op. 35: I. Allegro moderato": "rieding.MP3",
-                "Vivaldi - The Four Seasons, 'Winter'": "winter.mp3",
-                "Miki Matsubara - Stay With Me": "stayWithMe.mp3",
-                "Likin Park - By Myself": "byMyself.mp3",
-                "Linki Park - One More Light": "oneMoreLight.mp3",
-                "Linki Park - Numb": "numb.MP3",
-                "Linkin Park - Somewhere I Belong": "somewhereIBelong.MP3"
+                "Paganini - Caprice 24": {"file": "caprice24.MP3", "genre": "classical"},
+                "Paganini - La Capanella": {"file": "laCampanella.MP3", "genre": "classical"},
+                "Chopin - Nocturne op.9 No.2": {"file": "nocturne.mp3", "genre": "classical"},
+                "Chopin - Nocturne in C Sharp Minor for Violin and Piano": {"file": "nocturneViolin.MP3", "genre": "classical"},
+                "Oskar Rieding - Violin Concerto in B Minor, Op. 35: I. Allegro moderato": {"file": "rieding.MP3", "genre": "classical"},
+                "Vivaldi - The Four Seasons, 'Winter'": {"file": "winter.mp3", "genre": "classical"},
+                "Miki Matsubara - Stay With Me": {"file": "stayWithMe.mp3", "genre": "citypop"},
+                "Likin Park - By Myself": {"file": "byMyself.mp3", "genre": "rock"},
+                "Linki Park - One More Light": {"file": "oneMoreLight.mp3", "genre": "rock"},
+                "Linki Park - Numb": {"file": "numb.MP3", "genre": "rock"},
+                "Linkin Park - Somewhere I Belong": {"file": "somewhereIBelong.MP3", "genre": "rock"}
             }
 
             # Define as fontes

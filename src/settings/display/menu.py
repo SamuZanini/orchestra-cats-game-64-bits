@@ -13,8 +13,8 @@ def show_menu():
     while True:
         # Preenche a tela com a cor preta, basicamente limpando a tela a cada iteração.
         imports.dis.fill(imports.black)
-        # Desenha a imagem de fundo (stage_bg) na posição (0, 0).
-        imports.dis.blit(imports.stage_bg, (0, 0))
+        # Changed to use the new menu background
+        imports.dis.blit(imports.menu_bg, (0, 0))
         
         # Renderiza o título centralizado
         # O título "Orchestra Cats 🐈‍" é renderizado usando a fonte score_font e depois centralizado horizontalmente, calculando a posição com (dis_width - title.get_width()) / 2 e posicionado na vertical em 50 pixels.

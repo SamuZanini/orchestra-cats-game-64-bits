@@ -1,15 +1,15 @@
 from src.settings.imports.imports import imports
 from src.settings.display.menu import show_menu, show_end_screen
 
-def our_cats(cat_size, cat_list, cat_types):
+def our_cats(cat_size, cat_list, cat_types, current_conductor, current_musicians):
     if not cat_list:
         return
     
     for i, pos in enumerate(cat_list):
         if i == len(cat_list) - 1:  # Último elemento: cabeça
-            imports.dis.blit(imports.cat_conductor, (pos[0], pos[1]))
+            imports.dis.blit(current_conductor, (pos[0], pos[1]))
         elif i < len(cat_types):  # Elementos do corpo
-            imports.dis.blit(cat_types[i], (pos[0], pos[1]))
+            imports.dis.blit(current_musicians[i % len(current_musicians)], (pos[0], pos[1]))
 
 # Define quanto os gatos crescem a cada refeição
 incremento_gatos = 1
@@ -20,8 +20,23 @@ def gameLoop():
         if not selected_music:
             return
         
+        # Determina o gênero da música e define os sprites e background apropriados
+        music_genre = imports.music_list[selected_music]["genre"]
+        if music_genre == "classical":
+            current_bg = imports.classical_bg
+            current_conductor = imports.cat_conductor
+            current_musicians = imports.cat_musicians
+        elif music_genre == "citypop":
+            current_bg = imports.citypop_bg
+            current_conductor = imports.catpop_conductor
+            current_musicians = imports.catpop_musicians
+        elif music_genre == "rock":
+            current_bg = imports.rock_bg
+            current_conductor = imports.catrock_conductor
+            current_musicians = imports.catrock_musicians
+        
         # Carrega e reproduz a música selecionada
-        imports.pygame.mixer.music.load(imports.os.path.join(imports.assets_path, 'music', imports.music_list[selected_music]))
+        imports.pygame.mixer.music.load(imports.os.path.join(imports.assets_path, 'music', imports.music_list[selected_music]["file"]))
         imports.pygame.mixer.music.play()
         
         game_over = False
@@ -71,7 +86,8 @@ def gameLoop():
                 imports.pygame.mixer.music.stop()
                 break
             
-            imports.dis.blit(imports.stage_bg, (0, 0))
+            # Usa o background apropriado para o gênero atual
+            imports.dis.blit(current_bg, (0, 0))
             
             if is_red_yarn:
                 imports.dis.blit(imports.yarn_red, (foodx, foody))
@@ -93,7 +109,8 @@ def gameLoop():
                 if cat_types and len(cat_types) > length_of_cats - 1:
                     del cat_types[0]
             
-            our_cats(imports.cat_size, cat_list, cat_types)
+            # Passa os sprites atuais para a função our_cats
+            our_cats(imports.cat_size, cat_list, cat_types, current_conductor, current_musicians)
             
             imports.dis.blit(imports.yarn_gray_counter, (10, 10))
             score = imports.score_font.render(str(length_of_cats), True, imports.white)
@@ -108,7 +125,8 @@ def gameLoop():
                 foody = round(imports.random.randrange(0, imports.dis_height - imports.cat_size) / imports.cat_size) * imports.cat_size
                 
                 length_of_cats += incremento_gatos
-                cat_types.append(imports.random.choice(imports.cat_musicians))
+                # Usa os músicos apropriados para o gênero atual
+                cat_types.append(1)  # Apenas para manter o controle do comprimento
                 
                 if is_red_yarn:
                     current_speed = imports.base_speed + 2
