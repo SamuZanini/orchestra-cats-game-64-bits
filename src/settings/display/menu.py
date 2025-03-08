@@ -13,7 +13,7 @@ def show_menu():
     while True:
         # Preenche a tela com a cor preta, basicamente limpando a tela a cada iteração.
         imports.dis.fill(imports.black)
-        # Changed to use the new menu background
+        # # Desenha a imagem de fundo do menu (menu_bg) na posição (0, 0).
         imports.dis.blit(imports.menu_bg, (0, 0))
         
         # Renderiza o título centralizado

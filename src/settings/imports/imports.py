@@ -16,6 +16,7 @@ class Imports:
             import random
             import os
 
+            # Inicializa os módulos do pygame, incluindo o som
             pygame.init()
             pygame.mixer.init()
 
@@ -32,10 +33,10 @@ class Imports:
             self.dis = pygame.display.set_mode((self.dis_width, self.dis_height))
             pygame.display.set_caption('Orchestra Cats')
             
-            # Fix assets path to point to src/assets instead of settings/assets
+            # Corrigido assets path para src/assets invés de settings/assets
             self.assets_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets')
             pygame.display.set_icon(pygame.image.load(os.path.join(self.assets_path, 'images', 'game_icon.png')))
-            
+            # Cria um objeto Clock do Pygame, que é usado para controlar a taxa de atualização (FPS) do jogo. Isso garante que o jogo rode de forma consistente em diferentes máquinas, limitando a quantidade de frames por segundo e mantendo a velocidade do jogo estável.
             self.clock = pygame.time.Clock()
 
             # Tamanho do "bloco" (gato) e velocidade base
@@ -43,7 +44,8 @@ class Imports:
             self.base_speed = 5
             self.current_speed = self.base_speed
 
-            # Carrega os arquivos de imagem
+            # Carrega os arquivos de imagem a partir do diretório de assets
+            # O "os" é o módulo da biblioteca padrão do Python para interações com o sistema operacional, incluindo manipulação de caminhos de arquivos. Na expressão, ele é usado para construir, de forma portátil, o caminho até a pasta "assets".
             self.cat_conductor = pygame.image.load(os.path.join(self.assets_path, 'images', 'cat_conductor.png'))
             self.cat_musician = pygame.image.load(os.path.join(self.assets_path, 'images', 'cat_violin.png'))
             self.yarn_gray = pygame.image.load(os.path.join(self.assets_path, 'images', 'yarn_gray.png'))
@@ -51,6 +53,7 @@ class Imports:
             self.yarn_red = pygame.image.load(os.path.join(self.assets_path, 'images', 'yarn_red.png'))
 
             # Backgrounds para diferentes gêneros
+            # Carrega imagens de telas de término do jogo (game over e vitória)
             self.menu_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'bg_menu.png'))
             self.classical_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'stage_background.png'))
             self.citypop_bg = pygame.image.load(os.path.join(self.assets_path, 'images', 'bg_citypop.png'))
@@ -91,7 +94,7 @@ class Imports:
             ]
             self.catrock_conductor = pygame.image.load(os.path.join(self.assets_path, 'images', 'catrock_vocal.png'))
 
-            # Lista de músicas disponíveis com seus gêneros
+            # Dicionário com a lista de músicas disponíveis e seus nomes de arquivo
             self.music_list = {
                 "Paganini - Caprice 24": {"file": "caprice24.MP3", "genre": "classical"},
                 "Paganini - La Capanella": {"file": "laCampanella.MP3", "genre": "classical"},
@@ -106,15 +109,15 @@ class Imports:
                 "Linkin Park - Somewhere I Belong": {"file": "somewhereIBelong.MP3", "genre": "rock"}
             }
 
-            # Define as fontes
-            self.font_style = pygame.font.SysFont("Segoe UI Emoji", 25)
-            self.score_font = pygame.font.SysFont("Segoe UI Emoji", 35)
+            # Define as fontes usadas para exibição de texto, com suporte a emoji
+            self.font_style = pygame.font.SysFont("Segoe UI Emoji", 25) # Alterado: fonte com suporte a emoji
+            self.score_font = pygame.font.SysFont("Segoe UI Emoji", 35) # Alterado: fonte com suporte a emoji
             
-            # Make pygame modules easily accessible
+            # Faz os módulos do pygame facilmente acessíveis
             self.pygame = pygame
             self.time = time
             self.random = random
             self.os = os
 
-# Create a single instance that will be used throughout the game
+# Cria uma single instance que vai ser usada durante o game
 imports = Imports()

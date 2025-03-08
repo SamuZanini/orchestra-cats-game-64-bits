@@ -4,10 +4,10 @@ Este projeto é uma implementação do clássico jogo da cobrinha, desenvolvido 
 
 ## Participantes 🧙‍♂️
 
-- Samuel Zanini Campos Vanoni
-- Hugo Otávio dos Santos de Paula
-- Murilo Marques Dantas Vieira
-- João Vitor Nogueira Alves
+- Samuel Zanini Campos Vanoni (https://github.com/SamuZanini)
+- Hugo Otávio dos Santos de Paula (https://github.com/HugOtavioS)
+- Murilo Marques Dantas Vieira (https://github.com/Nogueirajv0078)
+- João Vitor Nogueira Alves ()
 
 ## Descrição 📝
 
@@ -48,6 +48,10 @@ python jogoCobra.py
 ```
 
 Divirta-se jogando! ✨
+
+## Lembre-se 💭
+
+- Será necessário criar a pasta "music" dentro de "assets" e adicionar as músicas desejadas. Atualize a lógica para se adequar a sua playlist! 💫
 
 ## Projeto com Fins Educacionais 🎓
 
