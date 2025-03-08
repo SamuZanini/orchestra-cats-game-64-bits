@@ -49,8 +49,8 @@ def gameLoop():
             current_musicians = imports.catrock_musicians
         
         # Carrega e reproduz a música selecionada
-        # imports.pygame.mixer.music.load(imports.os.path.join(imports.assets_path, 'music', imports.music_list[selected_music]["file"]))
-        # imports.pygame.mixer.music.play()
+        imports.pygame.mixer.music.load(imports.os.path.join(imports.assets_path, 'music', imports.music_list[selected_music]["file"]))
+        imports.pygame.mixer.music.play()
         
         # Nenhuma das instância abaixo foi atingida pelo jogador ainda, portanto são inicializadas como False.
         game_over = False
@@ -96,10 +96,6 @@ def gameLoop():
                 if event.type == imports.pygame.QUIT:
                     game_over = True
                 elif event.type == imports.pygame.KEYDOWN:
-                    if len(cat_list) > 1:
-                        if (event.key == imports.pygame.K_LEFT and pygameKey == imports.pygame.K_RIGHT) or (event.key == imports.pygame.K_RIGHT and pygameKey == imports.pygame.K_LEFT) or(event.key == imports.pygame.K_UP and pygameKey == imports.pygame.K_DOWN) or (event.key == imports.pygame.K_DOWN and pygameKey == imports.pygame.K_UP):
-                            continue
-                    pygameKey = event.key
                     if event.key == imports.pygame.K_LEFT:
                         x1_change = -imports.cat_size
                         y1_change = 0
@@ -202,10 +198,10 @@ def gameLoop():
             imports.clock.tick(current_speed)
             
             # Se a música terminou, assume vitória e encerra o loop de jogo
-            # if not imports.pygame.mixer.music.get_busy():
-            #     game_over = True
-            #     won = True
-            #     break
+            if not imports.pygame.mixer.music.get_busy():
+                game_over = True
+                won = True
+                break
         
         # Exibe a tela de término e verifica se o usuário deseja jogar novamente
         if not show_end_screen(won):
