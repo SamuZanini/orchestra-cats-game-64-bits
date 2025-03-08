@@ -41,6 +41,7 @@ class Imports:
             self.red = (213, 50, 80)
             self.gray = (128, 128, 128)
             self.green = (0, 255, 0)
+            self.yellow = (255, 255, 0)
 
             # Configurações da janela do jogo
             self.dis_width = 1024

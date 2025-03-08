@@ -3,23 +3,31 @@ from src.settings.imports.imports import imports
 def show_menu():
     # Exibe o menu principal, permitindo a escolha da música.
     # O usuário pode navegar com as setas e confirmar com ENTER.
+    # Volume pode ser ajustado com + e -
 
     # Define o índice do item atualmente selecionado, inicialmente o primeiro item do menu.
     selected = 0
     # Cria uma lista com todos os nomes das músicas disponíveis, extraídos das chaves do dicionário music_list.
     menu_items = list(imports.music_list.keys())
+    # Define o volume inicial como 50% e ajusta o volume da música de fundo.
+    volume = 0.5  # Volume inicial em 50%
+    imports.pygame.mixer.music.set_volume(volume)
     
     # A função entra em um loop infinito (while True:) para manter o menu ativo até que o usuário faça uma escolha ou feche a janela.
     while True:
         # Preenche a tela com a cor preta, basicamente limpando a tela a cada iteração.
         imports.dis.fill(imports.black)
-        # # Desenha a imagem de fundo do menu (menu_bg) na posição (0, 0).
+        # Desenha a imagem de fundo do menu (menu_bg) na posição (0, 0).
         imports.dis.blit(imports.menu_bg, (0, 0))
         
         # Renderiza o título centralizado
         # O título "Orchestra Cats 🐈‍" é renderizado usando a fonte score_font e depois centralizado horizontalmente, calculando a posição com (dis_width - title.get_width()) / 2 e posicionado na vertical em 50 pixels.
         title = imports.score_font.render("Orchestra Cats 🐈‍", True, imports.white)
         imports.dis.blit(title, [ (imports.dis_width - title.get_width()) / 2, 50 ])
+        
+        # Renderiza o controle de volume
+        volume_text = imports.font_style.render(f"Volume: {int(volume * 100)}% (+ ou - para ajustar)", True, imports.yellow)
+        imports.dis.blit(volume_text, [ (imports.dis_width - volume_text.get_width()) / 2, 100 ])
         
         # Renderiza cada item do menu e destaca o selecionado
         for i, item in enumerate(menu_items):
@@ -37,7 +45,6 @@ def show_menu():
             # Se o evento é imports.pygame.QUIT, ou seja, se o jogador fechar a janela, a função retorna None para indicar que não houve seleção de música.
             if event.type == imports.pygame.QUIT:
                 return None
-            
             # Se o evento for do tipo imports.pygame.KEYDOWN (tecla pressionada)
             if event.type == imports.pygame.KEYDOWN:
                 if event.key == imports.pygame.K_UP:
@@ -49,7 +56,15 @@ def show_menu():
                 elif event.key == imports.pygame.K_RETURN:
                     # Se a tecla pressionada for ENTER (imports.pygame.K_RETURN): o item atualmente selecionado (a música correspondente) é retornado e o menu é encerrado.
                     return menu_items[selected]
-                
+                elif event.key == imports.pygame.K_PLUS or event.key == imports.pygame.K_KP_PLUS:
+                    # Aumenta o volume em 10%
+                    volume = min(1.0, volume + 0.1)
+                    imports.pygame.mixer.music.set_volume(volume)
+                elif event.key == imports.pygame.K_MINUS or event.key == imports.pygame.K_KP_MINUS:
+                    # Diminui o volume em 10%
+                    volume = max(0.0, volume - 0.1)
+                    imports.pygame.mixer.music.set_volume(volume)
+
 def show_end_screen(won=False):
     # Exibe a tela de término (vitória ou derrota) e aguarda o comando do usuário para reiniciar.
     # Retorna True se o usuário deseja jogar novamente, False caso contrário.
