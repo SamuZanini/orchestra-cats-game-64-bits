@@ -29,7 +29,7 @@ O jogo da cobrinha é um jogo simples onde o jogador controla uma cobra que se m
 
 1. Clone o repositório:
     ```bash
-    git clone https://github.com/seu-usuario/jogo-cobrinha.git
+    git clone https://github.com/SamuZanini/orchestra-cats-game-64-bits.git
     ```
 2. Navegue até o diretório do projeto:
     ```bash
