@@ -206,10 +206,10 @@ def gameLoop():
             imports.clock.tick(current_speed)
             
             # Se a música terminou, assume vitória e encerra o loop de jogo
-            # if not imports.pygame.mixer.music.get_busy():
-            #     game_over = True
-            #     won = True
-            #     break
+            if not imports.pygame.mixer.music.get_busy():
+                game_over = True
+                won = True
+                break
         
         # Exibe a tela de término e verifica se o usuário deseja jogar novamente
         if not show_end_screen(won):
