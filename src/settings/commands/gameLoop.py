@@ -1,6 +1,12 @@
 from src.settings.imports.imports import imports
 from src.settings.display.menu import show_menu, show_end_screen
 
+def draw_grid():
+    for i in range(0, imports.dis_width, imports.cat_size):
+        imports.pygame.draw.line(imports.dis, (128, 128, 128), (i, 0), (i, imports.dis_height))
+    for i in range(0, imports.dis_height, imports.cat_size):
+        imports.pygame.draw.line(imports.dis, (128, 128, 128), (0, i), (imports.dis_width, i))
+
 def our_cats(cat_size, cat_list, cat_types, current_conductor, current_musicians):
     # Exibe os gatos na tela.
     # A última posição da lista representa a cabeça (o condutor)
@@ -49,8 +55,8 @@ def gameLoop():
             current_musicians = imports.catrock_musicians
         
         # Carrega e reproduz a música selecionada
-        imports.pygame.mixer.music.load(imports.os.path.join(imports.assets_path, 'music', imports.music_list[selected_music]["file"]))
-        imports.pygame.mixer.music.play()
+        # imports.pygame.mixer.music.load(imports.os.path.join(imports.assets_path, 'music', imports.music_list[selected_music]["file"]))
+        # imports.pygame.mixer.music.play()
         
         # Nenhuma das instância abaixo foi atingida pelo jogador ainda, portanto são inicializadas como False.
         game_over = False
@@ -121,8 +127,10 @@ def gameLoop():
                 imports.pygame.mixer.music.stop()
                 break
             
+            draw_grid()
             # Usa o background apropriado para o gênero atual
             imports.dis.blit(current_bg, (0, 0))
+            draw_grid()
             
             # Desenha o "novelo" (comida): cor vermelha ou cinza conforme o estado
             if is_red_yarn:
@@ -198,10 +206,10 @@ def gameLoop():
             imports.clock.tick(current_speed)
             
             # Se a música terminou, assume vitória e encerra o loop de jogo
-            if not imports.pygame.mixer.music.get_busy():
-                game_over = True
-                won = True
-                break
+            # if not imports.pygame.mixer.music.get_busy():
+            #     game_over = True
+            #     won = True
+            #     break
         
         # Exibe a tela de término e verifica se o usuário deseja jogar novamente
         if not show_end_screen(won):
