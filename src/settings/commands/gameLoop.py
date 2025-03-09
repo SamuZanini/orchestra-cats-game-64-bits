@@ -96,6 +96,10 @@ def gameLoop():
                 if event.type == imports.pygame.QUIT:
                     game_over = True
                 elif event.type == imports.pygame.KEYDOWN:
+                    if len(cat_list) > 1:
+                        if (event.key == imports.pygame.K_LEFT and pygameKey == imports.pygame.K_RIGHT) or (event.key == imports.pygame.K_RIGHT and pygameKey == imports.pygame.K_LEFT) or(event.key == imports.pygame.K_UP and pygameKey == imports.pygame.K_DOWN) or (event.key == imports.pygame.K_DOWN and pygameKey == imports.pygame.K_UP):
+                            continue
+                    pygameKey = event.key
                     if event.key == imports.pygame.K_LEFT:
                         x1_change = -imports.cat_size
                         y1_change = 0
