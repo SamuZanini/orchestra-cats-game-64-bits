@@ -1,11 +1,12 @@
 from src.settings.imports.imports import imports
 from src.settings.display.menu import show_menu, show_end_screen
 
-def draw_grid():
-    for i in range(0, imports.dis_width, imports.cat_size):
-        imports.pygame.draw.line(imports.dis, (128, 128, 128), (i, 0), (i, imports.dis_height))
-    for i in range(0, imports.dis_height, imports.cat_size):
-        imports.pygame.draw.line(imports.dis, (128, 128, 128), (0, i), (imports.dis_width, i))
+# Função que desenha a grade na tela para orientação do jogador, ativar se necessário
+# def draw_grid():
+#     for i in range(0, imports.dis_width, imports.cat_size):
+#         imports.pygame.draw.line(imports.dis, (128, 128, 128), (i, 0), (i, imports.dis_height))
+#     for i in range(0, imports.dis_height, imports.cat_size):
+#         imports.pygame.draw.line(imports.dis, (128, 128, 128), (0, i), (imports.dis_width, i))
 
 def our_cats(cat_size, cat_list, cat_types, current_conductor, current_musicians):
     # Exibe os gatos na tela.
@@ -131,10 +132,10 @@ def gameLoop():
                 imports.pygame.mixer.music.stop()
                 break
             
-            draw_grid()
+            # draw_grid() # Ativar se necessário
             # Usa o background apropriado para o gênero atual
             imports.dis.blit(current_bg, (0, 0))
-            draw_grid()
+            # draw_grid() # Ativar se necessário
             
             # Desenha o "novelo" (comida): cor vermelha ou cinza conforme o estado
             if is_red_yarn:
