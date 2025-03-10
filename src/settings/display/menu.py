@@ -94,3 +94,5 @@ def show_end_screen(won=False):
             if event.type == imports.pygame.KEYDOWN:
                 if event.key == imports.pygame.K_RETURN:
                     return True
+                if event.key == imports.pygame.K_ESCAPE:
+                    return False
