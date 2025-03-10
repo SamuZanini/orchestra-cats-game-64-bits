@@ -120,6 +120,10 @@ def gameLoop():
                     elif event.key == imports.pygame.K_DOWN:
                         y1_change = imports.cat_size
                         x1_change = 0
+                
+                    if event.key == imports.pygame.QUIT or event.key == imports.pygame.K_ESCAPE:
+                        game_over = True
+                        won = False
 
             # Atualiza a posição da cabeça do gato conforme a direção
             x1 += x1_change
@@ -217,7 +221,7 @@ def gameLoop():
                 break
         
         # Exibe a tela de término e verifica se o usuário deseja jogar novamente
-        if not show_end_screen(won):
+        if not show_end_screen(length_of_cats, won):
             break
 
     imports.pygame.quit()

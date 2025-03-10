@@ -65,7 +65,7 @@ def show_menu():
                     volume = max(0.0, volume - 0.1)
                     imports.pygame.mixer.music.set_volume(volume)
 
-def show_end_screen(won=False):
+def show_end_screen(score = 0, won=False):
     # Exibe a tela de término (vitória ou derrota) e aguarda o comando do usuário para reiniciar.
     # Retorna True se o usuário deseja jogar novamente, False caso contrário.
     waiting = True
@@ -74,15 +74,18 @@ def show_end_screen(won=False):
         if won:
             # O cálculo (dis_width/2 - imports.you_win_img.get_width()/2) centraliza horizontalmente a imagem: ele pega a metade da largura da tela e subtrai metade da largura da imagem, fazendo com que sua posição X seja justamente no meio. De forma similar, (dis_height/2 - imports.you_win_img.get_height()/2) centraliza verticalmente a imagem.
             imports.dis.blit(imports.you_win_img, (imports.dis_width/2 - imports.you_win_img.get_width()/2, imports.dis_height/2 - imports.you_win_img.get_height()/2))
-            text = imports.font_style.render("Pressione ENTER para jogar novamente", True, imports.green)
+            text1 = imports.font_style.render("Pressione ENTER para jogar novamente", True, imports.green)
+            text2 = imports.font_style.render("", True, imports.green)
         else:
             imports.dis.blit(imports.game_over_img, (imports.dis_width/2 - imports.game_over_img.get_width()/2, imports.dis_height/2 - imports.game_over_img.get_height()/2))
-            text = imports.font_style.render("Pressione ENTER para jogar novamente", True, imports.green)
+            text1 = imports.font_style.render("Sua pontuação: " + str(score), True, imports.white)
+            text2 = imports.font_style.render("Pressione ENTER para jogar novamente", True, imports.green)
         
         # Eixo X: É calculado como dis_width/3, ou seja, um terço da largura total da tela. Isso posiciona o texto aproximadamente um terço do caminho a partir da margem esquerda da tela.
         # Eixo Y: É definido como dis_height - 100, que posiciona o texto 100 pixels acima do final da altura da tela.
         # Em resumo, esse cálculo posiciona o texto de forma que ele fique na parte inferior da tela, deslocado um terço da largura a partir da esquerda.
-        imports.dis.blit(text, [imports.dis_width/3, imports.dis_height - 100])
+        imports.dis.blit(text1, [imports.dis_width/2 - text1.get_size()[0] / 2, 100])
+        imports.dis.blit(text2, [imports.dis_width/2 - text2.get_size()[0] / 2, imports.dis_height - 100])
         imports.pygame.display.update()
         
         # Aguarda o evento de pressionar ENTER ou fechar a janela
@@ -94,3 +97,5 @@ def show_end_screen(won=False):
             if event.type == imports.pygame.KEYDOWN:
                 if event.key == imports.pygame.K_RETURN:
                     return True
+                if event.key == imports.pygame.K_ESCAPE:
+                    return False
