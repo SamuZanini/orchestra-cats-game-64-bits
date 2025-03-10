@@ -74,12 +74,12 @@ def show_end_screen(score = 0, won=False):
         if won:
             # O cálculo (dis_width/2 - imports.you_win_img.get_width()/2) centraliza horizontalmente a imagem: ele pega a metade da largura da tela e subtrai metade da largura da imagem, fazendo com que sua posição X seja justamente no meio. De forma similar, (dis_height/2 - imports.you_win_img.get_height()/2) centraliza verticalmente a imagem.
             imports.dis.blit(imports.you_win_img, (imports.dis_width/2 - imports.you_win_img.get_width()/2, imports.dis_height/2 - imports.you_win_img.get_height()/2))
-            text1 = imports.font_style.render("Pressione ENTER para jogar novamente", True, imports.green)
-            text2 = imports.font_style.render("", True, imports.green)
+            text1 = imports.font_style.render("Sua pontuação: " + str(score), True, imports.yellow, imports.font_style.bold)
+            text2 = imports.font_style.render("Pressione ENTER para jogar novamente", True, imports.yellow, imports.font_style.bold)
         else:
             imports.dis.blit(imports.game_over_img, (imports.dis_width/2 - imports.game_over_img.get_width()/2, imports.dis_height/2 - imports.game_over_img.get_height()/2))
-            text1 = imports.font_style.render("Sua pontuação: " + str(score), True, imports.white)
-            text2 = imports.font_style.render("Pressione ENTER para jogar novamente", True, imports.green)
+            text1 = imports.font_style.render("Sua pontuação: " + str(score), True, imports.yellow, imports.font_style.bold)
+            text2 = imports.font_style.render("Pressione ENTER para jogar novamente", True, imports.yellow, imports.font_style.bold)
         
         # Eixo X: É calculado como dis_width/3, ou seja, um terço da largura total da tela. Isso posiciona o texto aproximadamente um terço do caminho a partir da margem esquerda da tela.
         # Eixo Y: É definido como dis_height - 100, que posiciona o texto 100 pixels acima do final da altura da tela.
