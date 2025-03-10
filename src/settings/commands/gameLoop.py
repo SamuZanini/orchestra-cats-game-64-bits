@@ -221,7 +221,7 @@ def gameLoop():
                 break
         
         # Exibe a tela de término e verifica se o usuário deseja jogar novamente
-        if not show_end_screen(won):
+        if not show_end_screen(length_of_cats, won):
             break
 
     imports.pygame.quit()
